@@ -71,6 +71,14 @@ void _pchar(stack_t **head, unsigned int line_number);
 void _pstr(stack_t **head, unsigned int line_number);
 /* rotate top element to be last element */
 void _rotl(stack_t **head, unsigned int line_number);
+/* rotate bottom element to top element */
+void _rotr(stack_t **head, unsigned int line_number);
+
+/* queue status */
+void _queue(stack_t **head, unsigned int line_number);
+/* stack status*/
+void _stack(stack_t **head, unsigned int line_number);
+
 
 /* helper functions*/
 stack_t *add_node_end(stack_t **head, const int n);
