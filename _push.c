@@ -8,10 +8,13 @@
  */
 void _push(stack_t **head, unsigned int line_number)
 {
-	stack_t *temp;
+	(void) line_number;
 
 	printf("enter push\n");
-	temp = add_node_end(head, glob[0]);
+	if (glob[1] == 0)
+		add_node_end(head, glob[0]);
+	else
+		add_node(head, glob[0]);
 }
 
 /**
@@ -23,15 +26,16 @@ void _push(stack_t **head, unsigned int line_number)
 void _pall(stack_t **head, unsigned int line_number)
 {
 	stack_t *temp;
-	int i;
+	(void) line_number;
 
 	printf("enter pall\n");
 	if (*head != NULL)
 	{
 		temp = find_end(head);
-		for (i = 0; temp != NULL; temp = temp->prev, i++)
+		while (temp != NULL)
 		{
 			printf("%d\n", temp->n);
+			temp = temp->prev;
 		}
 	}
 	printf("finish\n");
@@ -49,7 +53,13 @@ void _pint(stack_t **head, unsigned int line_number)
 
 	printf("-------------------------------------------\n");
 	temp = find_end(head);
-	printf("%d\n", temp->n);
+	if (temp == NULL)
+	{
+		printf("L%u: can't pint, stack empty\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	else
+		printf("%d\n", temp->n);
 }
 
 /**
@@ -77,7 +87,12 @@ void _pop(stack_t **head, unsigned int line_number)
 	free(temp);
 }
 
-
+/**
+ * _swap - swap the location of the top two values in the stack
+ * @head: beginning of the stack
+ * @line_number: the line number of command in the file
+ * Return: nothing
+ */
 void _swap(stack_t **head, unsigned int line_number)
 {
 	stack_t *temp, *helper;

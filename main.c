@@ -14,7 +14,8 @@ int main(int argc, char **argv)
 		{"push", _push}, {"pall", _pall}, {"pint", _pint}, {"pop", _pop},
 		{"swap", _swap}, {"add", _add}, {"nop", _nop}, {"sub", _sub},
 		{"div", _div}, {"mul", _mul}, {"mod", _mod}, {"pchar", _pchar},
-		{"pstr", _pstr}, {"rotl", _rotl}
+		{"pstr", _pstr}, {"rotl", _rotl}, {"rotr", _rotr},
+		{"queue", _queue}, {"stack", _stack}
 	};
 
 	len = 0;
@@ -38,7 +39,7 @@ int main(int argc, char **argv)
 		printf("begin reading file\n");
 		cmd = get_cmd(line, line_num);
 		printf("got the cmd %s\n", cmd);
-		for (j = 0; j < 14; j++)
+		for (j = 0; j < 17; j++)
 		{
 			if (cmd[0] == '#')
 				break;
