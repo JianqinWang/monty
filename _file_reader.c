@@ -1,10 +1,10 @@
 #include "monty.h"
+
 /**
- * get_cmd -
- * @line:
- * @line_num:
- *
- * Return:
+ * get_cmd - parse the command found from line from text file
+ * @line: line to parse
+ * @line_num: line number of command in text flie
+ * Return: the command found from getline
  */
 char *get_cmd(char *line, unsigned int line_num)
 {

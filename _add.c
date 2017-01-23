@@ -9,7 +9,7 @@
 void _add(stack_t **head, unsigned int line_number)
 {
 	stack_t *temp, *helper;
-	int i, j;
+	int i;
 
 	temp = find_end(head);
 	if (temp == NULL || temp->prev == NULL)
@@ -19,13 +19,9 @@ void _add(stack_t **head, unsigned int line_number)
 	}
 	helper = temp->prev;
 	i = helper->n + temp->n;
-	glob[0] = i;
 	_pop(head, line_number);
 	_pop(head, line_number);
-	j = glob[1];
-	glob[1] = 0;
-	_push(head, line_number);
-	glob[1] = j;
+	add_node_end(head, i);
 }
 
 /**
@@ -50,7 +46,7 @@ void _nop(stack_t **head, unsigned int line_number)
 void _sub(stack_t **head, unsigned int line_number)
 {
 	stack_t *temp, *helper;
-	int i, j;
+	int i;
 
 	temp = find_end(head);
 	if (temp == NULL || temp->prev == NULL)
@@ -60,13 +56,9 @@ void _sub(stack_t **head, unsigned int line_number)
 	}
 	helper = temp->prev;
 	i = helper->n - temp->n;
-	glob[0] = i;
 	_pop(head, line_number);
 	_pop(head, line_number);
-        j = glob[1];
-        glob[1] = 0;
-        _push(head, line_number);
-        glob[1] = j;
+	add_node_end(head, i);
 }
 
 /**
@@ -78,7 +70,7 @@ void _sub(stack_t **head, unsigned int line_number)
 void _div(stack_t **head, unsigned int line_number)
 {
 	stack_t *temp, *helper;
-	int i, j;
+	int i;
 
 	temp = find_end(head);
 	if (temp == NULL || temp->prev == NULL)
@@ -88,13 +80,9 @@ void _div(stack_t **head, unsigned int line_number)
 	}
 	helper = temp->prev;
 	i = helper->n / temp->n;
-	glob[0] = i;
 	_pop(head, line_number);
 	_pop(head, line_number);
-        j = glob[1];
-        glob[1] = 0;
-        _push(head, line_number);
-        glob[1] = j;
+	add_node_end(head, i);
 }
 
 /**
@@ -106,7 +94,7 @@ void _div(stack_t **head, unsigned int line_number)
 void _mul(stack_t **head, unsigned int line_number)
 {
 	stack_t *temp, *helper;
-	int i, j;
+	int i;
 
 	temp = find_end(head);
 	if (temp == NULL || temp->prev == NULL)
@@ -116,11 +104,7 @@ void _mul(stack_t **head, unsigned int line_number)
 	}
 	helper = temp->prev;
 	i = helper->n * temp->n;
-	glob[0] = i;
 	_pop(head, line_number);
 	_pop(head, line_number);
-        j = glob[1];
-        glob[1] = 0;
-        _push(head, line_number);
-        glob[1] = j;
+	add_node_end(head, i);
 }
