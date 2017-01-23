@@ -1,5 +1,11 @@
 #include "monty.h"
-
+/**
+ * get_cmd -
+ * @line:
+ * @line_num:
+ *
+ * Return:
+ */
 char *get_cmd(char *line, unsigned int line_num)
 {
 	int i;
