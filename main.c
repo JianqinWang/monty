@@ -1,6 +1,12 @@
 #include "monty.h"
 
 int glob[] = {0, 0};
+/**
+ * main - the main execution frame for monty interpreter
+ * @argc: number of arguments read from command line
+ * @argv: the commands read from command line as array
+ * Return: EXIT_SUCCESS for success, EXIT_FAILURE if any failures
+ */
 int main(int argc, char **argv)
 {
 	FILE *fp;
@@ -8,7 +14,7 @@ int main(int argc, char **argv)
 	size_t len;
 	ssize_t read;
 	stack_t *head;
-	unsigned int line_num;
+	unsigned int line_num, cmd_stat;
 	int j;
 	instruction_t instruct[] = {
 		{"push", _push}, {"pall", _pall}, {"pint", _pint}, {"pop", _pop},
@@ -29,13 +35,14 @@ int main(int argc, char **argv)
 	fp = fopen(argv[1], "r");
 	if (fp == NULL)
 	{
-		printf("couldn't open file\n");
+		printf("Error: can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
 	line_num = 1;
 	printf("begin reading\n");
 	while ((read = getline(&line, &len, fp)) != -1)
 	{
+		cmd_stat = 0;
 		printf("begin reading file\n");
 		cmd = get_cmd(line, line_num);
 		printf("got the cmd %s\n", cmd);
@@ -47,9 +54,15 @@ int main(int argc, char **argv)
 			{
 				printf("found function\n");
 				instruct[j].f(&head, line_num);
+				cmd_stat = 1;
 				break;
 			}
 			printf("%s\n%s\n%d\n", cmd, instruct[j].opcode, strcmp(instruct[j].opcode, cmd));
+		}
+		if (cmd_stat == 0)
+		{
+			printf("L%u: unknown instruction %s\n", line_num, cmd);
+			exit(EXIT_FAILURE);
 		}
 		printf("break loop\n");
 		line_num++;
