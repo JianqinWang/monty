@@ -4,21 +4,23 @@ This is a Holberton School partner project with @jayjay823 and @rdsim8589. This 
 
 ##How To Use
 ```
-$ git clone git@github.com:j-tyler/printf.git
+$ git clone git@github.com:jayjay823/monty.git
 ```
-compile everything within the directory and use _printf instead of printf
+compile everything within the directory that ends with .c
 ```
-$ gcc -Wall -Werror -Wextra -pedantic *.c
+$ gcc -Wall -Werror -Wextra -pedantic *.c -o monty
 ```
-##Declaration
-int _printf(const char *format, ...)
+run the binary file monty with the .m file (only accepts one file at a time)
+```
+$ ./monty test.m
+```
 
 ##Completed Features
 
-###Format tags
+### Avaliable opcodes
 format tags must follow the format of [flags][width][.precision][length]specifier
 
-| **specifier** | **output**                            |
+| **op code** | **output**                            |
 |---------------|---------------------------------------|
 | c             | characters                            |
 | s		| string of characters                  |
@@ -35,7 +37,7 @@ format tags must follow the format of [flags][width][.precision][length]specifie
   <col width="45%">
   <col width="65%">
   <tr>
-    <td><b>Flags</b></td>
+    <td><b>op codes</b></td>
     <td><b>Effected Specifers</b></td>
     <td><b>Description and Examples</b> </td>
   </tr>
