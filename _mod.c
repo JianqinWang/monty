@@ -18,6 +18,11 @@ void _mod(stack_t **head, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 	helper = temp->prev;
+	if (temp->n == 0)
+	{
+		printf("L%u: division by zero\n", line_number);
+		exit(EXIT_FAILURE);
+	}
 	i = helper->n % temp->n;
 	_pop(head, line_number);
 	_pop(head, line_number);
