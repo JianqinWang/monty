@@ -1,5 +1,4 @@
 #include "monty.h"
-
 /**
  * get_cmd - parse the command found from line from text file
  * @line: line to parse
@@ -9,8 +8,9 @@
 char *get_cmd(char *line, unsigned int line_num)
 {
 	int i;
-	char *t, *temp_num;
+	char *t, *temp_num, *helper;
 
+	printf("enter get_cmd\n");
 	t = strtok(line, " \n\t");
 	printf("glob is %d %d\n", glob[0], glob[1]);
 	if (strcmp(t, "push") == 0)
