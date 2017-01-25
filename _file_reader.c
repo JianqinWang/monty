@@ -8,6 +8,7 @@
 char *get_cmd(char *line, unsigned int line_num)
 {
 	int i;
+	char *ptr;
 	char *t, *temp_num, *helper;
 
 	printf("enter get_cmd\n");
@@ -18,24 +19,18 @@ char *get_cmd(char *line, unsigned int line_num)
 		printf("enter\n");
 		temp_num = strtok(NULL, " ");
 		printf("temp_num is %s\n", temp_num);
-		if (temp_num == NULL)
+		if (temp_num == NULL || strlen(temp_num) == 1)
 		{
 			printf("L%u: usage: push integer\n", line_num);
 			exit(EXIT_FAILURE);
 		}
-		for (i = 0; temp_num[i] >= 32 && temp_num[i] <= 126; i++)
+		i = strtol(temp_num, &ptr, 10);
+		printf("errno is %d\n", errno);
+		if (errno != 0)
 		{
-			printf("temp_num[i] is %c\n", temp_num[i]);
-			if (temp_num[i] > '9' || temp_num[i] < '0')
-			{
-				printf("temp_num[i] is %c\n", temp_num[i]);
-				printf("L%u: usage: push integer\n", line_num);
-				exit(EXIT_FAILURE);
-			}
+			printf("L%u: usage: push integer\n", line_num);
+			exit(EXIT_FAILURE);
 		}
-		printf("run atoi\n");
-		i = atoi(temp_num);
-		printf("got atoi\n");
 		glob[0] = i;
 		printf("set global\n");
 	}
