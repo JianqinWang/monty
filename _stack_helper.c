@@ -39,6 +39,8 @@ stack_t *find_end(stack_t **head)
 {
 	stack_t *temp;
 
+	if (*head == NULL)
+		return NULL;
 	temp = *head;
 	while (temp->next != NULL)
 	{
