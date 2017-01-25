@@ -44,6 +44,8 @@ int main(int argc, char **argv)
 	{
 		cmd_stat = 0;
 		printf("begin reading file\n");
+		if (strlen(line) == 1)
+			break;
 		cmd = get_cmd(line, line_num);
 		printf("got the cmd %s\n", cmd);
 		for (j = 0; j < 17; j++)
