@@ -9,7 +9,7 @@ char *get_cmd(char *line, unsigned int line_num)
 {
 	int i;
 	char *ptr;
-	char *t, *temp_num, *helper;
+	char *t, *temp_num;
 
 	printf("enter get_cmd\n");
 	t = strtok(line, " \n\t");
