@@ -58,14 +58,14 @@ The default method of storing will be the stack
     <td>
 	The opcode push pushes an element to the stack.</br></br>
 	Example:</br>
-		<code> $cat test_1.m</code></br>
-		<code> >>> push 1</code></br>
-		<code> >>> push 2</code></br>
-		<code> >>> pall</code></br>
+		<pre><code>$cat test_1.m
+>>> push 1
+>>> push 2
+>>> pall</code></pre>
 	output</br>
-		<code> $ ./monty test_1.m</code></br>
-		<code> >>> 1</code></br>
-		<code> >>> 2</code></br>
+		<pre><code>$ ./monty test_1.m
+>>> 1
+>>> 2</code></pre>
 
 	if push is not followed a negative or postive int, output will be:</br>
 	<code>L(line_number): usage: push integer<code></br>
