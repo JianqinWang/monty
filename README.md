@@ -16,7 +16,7 @@ $ ./monty test.m
 ```
 
 ##Completed Features
-### Proper useage
+### Proper usage
 Must pass one file that that exist.
 if non-existant file passed
 ```
