@@ -28,20 +28,20 @@ if no files passed or more than one file passed
 $ ./monty test_1.m test_2.m
 >>> USAGE: monty file
 ```
-### Avaliable opcodes
-format tags must follow the format of [flags][width][.precision][length]specifier
 
-| **op code** | **output**                            |
-|---------------|---------------------------------------|
-| c             | characters                            |
-| s		| string of characters                  |
-| i or d        | signed decimal int                    |
-| u             | unsigned decimal int                  |
-| o             | signed octal                          |
-| x             | unsigned hexadecimal int              |
-| X             | unsigned hexadecimal int (Upper Case) |
-| b             | Binary                                |
-| p             | pointer address                       |
+Files must contain valid opcode
+If invalid given
+```
+$cat test_1.m
+>>> bad_fun
+>>> push 2
+>>> pall
+$ ./monty test_1.m
+>>> L1: unknown instruction bad_fun
+```
+
+
+### Avaliable opcodes
 
 
 <table class="tg">
@@ -56,11 +56,20 @@ format tags must follow the format of [flags][width][.precision][length]specifie
     <td>push</td>
     <td>
 	The opcode push pushes an element to the stack.</br>
-	<code>_printf("A%3dlast", 5);></br>
-	_printf("A%-3dlast", 5);</br></code></br>
+	<code>
+		$cat test_1.m</br>
+		>>> push 1</br>
+		>>> push 2</br>
+		>>> pall</br>
+	</code></br>
 	output</br>
-	<code>$ A  5last</code></br>
-        <code>$ A5  last</code></br>
+	<code>
+		$ ./monty test_1.m</br>
+		>>> 1</br>
+		>>> 2</br>
+        </code></br>
+	Will produce an error if push is not followed a negative or postive int</br>
+	<code>L<line_number>: usage: push integer<code></br>
     </td>
   </tr>
   <tr>
