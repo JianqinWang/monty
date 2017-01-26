@@ -26,7 +26,8 @@ char *get_cmd(char *line, unsigned int line_num)
 		}
 		i = strtol(temp_num, &ptr, 10);
 		printf("errno is %d\n", errno);
-		if (errno != 0)
+		if (errno == ERANGE || (*ptr != '\0' && *ptr != '\n'
+					&& *ptr != ' ' && *ptr != '\t'))
 		{
 			printf("L%u: usage: push integer\n", line_num);
 			exit(EXIT_FAILURE);
