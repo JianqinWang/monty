@@ -383,6 +383,7 @@ The default method of storing will be the stack
   </tr>
   <tr>
     <td>queue</td>
+    <td>
 	The opcode queue sets the format of the data to a queue (FIFO).</br></br>
 	Example:</br>
 		<code> $cat test_1.m</code></br>
@@ -399,7 +400,6 @@ The default method of storing will be the stack
 		<code> >>> 1</code></br>
 		<code> >>> 2</code></br>
 		<code> >>> 3</code></br>
-    <td>
     </td>
   </tr>
   <tr>
