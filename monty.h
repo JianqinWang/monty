@@ -85,5 +85,6 @@ void _stack(stack_t **head, unsigned int line_number);
 stack_t *add_node_end(stack_t **head, const int n);
 stack_t *add_node(stack_t **head, const int n);
 stack_t *find_end(stack_t **head);
+void free_stack(stack_t **head);
 char *get_cmd(char *line, unsigned int line_num);
 #endif

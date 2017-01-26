@@ -81,3 +81,21 @@ stack_t *add_node(stack_t **head, const int n)
 	*head = new_node;
 	return (new_node);
 }
+
+/**
+ * free_stack - free the entire stack of values
+ * @head: beginning of the linked list
+ * Return: nothing
+ */
+void free_stack(stack_t **head)
+{
+	stack_t *temp, *helper;
+
+	temp = *head;
+	while (temp != NULL)
+	{
+		helper = temp;
+		temp = temp->next;
+		free(helper);
+	}
+}

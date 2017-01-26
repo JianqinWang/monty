@@ -64,15 +64,16 @@ int main(int argc, char **argv)
 		if (cmd_stat == 0)
 		{
 			printf("L%u: unknown instruction %s\n", line_num, cmd);
+			free_stack(&head);
 			exit(EXIT_FAILURE);
 		}
 		printf("break loop\n");
 		line_num++;
 		printf("linenum change\n");
 	}
-
+	free_stack(&head);
 	fclose(fp);
 	if (line)
 		free(line);
-	exit(EXIT_SUCCESS);
+	free_stack(&head);
 }

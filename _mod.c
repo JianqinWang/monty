@@ -15,12 +15,14 @@ void _mod(stack_t **head, unsigned int line_number)
 	if (temp == NULL || temp->prev == NULL)
 	{
 		printf("L%u: can't mod, stack too short\n", line_number);
+		free_stack(head);
 		exit(EXIT_FAILURE);
 	}
 	helper = temp->prev;
 	if (temp->n == 0)
 	{
 		printf("L%u: division by zero\n", line_number);
+		free_stack(head);
 		exit(EXIT_FAILURE);
 	}
 	i = helper->n % temp->n;
@@ -43,6 +45,7 @@ void _pchar(stack_t **head, unsigned int line_number)
 	if (temp == NULL)
 	{
 		printf("L%u: can't pchar, value out of range\n", line_number);
+		free_stack(head);
 		exit(EXIT_FAILURE);
 	}
 	if (temp->n >= 32 && temp->n <= 127)
@@ -50,6 +53,7 @@ void _pchar(stack_t **head, unsigned int line_number)
 	else
 	{
 		printf("L%u: can't pchar, value out of range\n", line_number);
+		free_stack(head);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -69,6 +73,7 @@ void _pstr(stack_t **head, unsigned int line_number)
 	while (temp != NULL && temp->n > 0 && temp->n <= 127)
 	{
 		printf("%c", temp->n);
+		free_stack(head);
 		temp = temp->prev;
 	}
 	printf("\n");
@@ -85,6 +90,8 @@ void _rotl(stack_t **head, unsigned int line_number)
 	stack_t *temp;
 	(void) line_number;
 
+	if (*head == NULL)
+		return;
 	temp = find_end(head);
 	add_node(head, temp->n);
 	while (temp != NULL)
@@ -106,6 +113,8 @@ void _rotr(stack_t **head, unsigned int line_number)
 	stack_t *temp, *helper;
 	(void) line_number;
 
+	if (*head == NULL)
+		return;
 	temp = *head;
 	add_node_end(head, temp->n);
 	helper = temp->next;
