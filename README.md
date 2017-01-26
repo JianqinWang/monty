@@ -56,18 +56,15 @@ $ ./monty test_1.m
     <td>push</td>
     <td>
 	The opcode push pushes an element to the stack.</br>
-	<code>
-		$cat test_1.m</br>
-		>>> push 1</br>
-		>>> push 2</br>
-		>>> pall</br>
-	</code></br>
+	<code> $cat test_1.m</code></br>
+	<code> >>> push 1<code></br>
+	<code> >>> push 2</code></br>
+	<code> >>> pall</code></br>
 	output</br>
-	<code>
-		$ ./monty test_1.m</br>
-		>>> 1</br>
-		>>> 2</br>
-        </code></br>
+	<code> $ ./monty test_1.m</code></br
+	<code> >>> 1</code></br>
+	<code> >>> 2</code></br>
+
 	Will produce an error if push is not followed a negative or postive int</br>
 	<code>L<line_number>: usage: push integer<code></br>
     </td>
