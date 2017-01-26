@@ -51,7 +51,7 @@ void _pint(stack_t **head, unsigned int line_number)
 	temp = find_end(head);
 	if (temp == NULL)
 	{
-		printf("L<%u>: can't pint, stack empty\n", line_number);
+		printf("L%u: can't pint, stack empty\n", line_number);
 		free_stack(head);
 		exit(EXIT_FAILURE);
 	}
