@@ -1,6 +1,6 @@
 #Holberton School Project - interpetor for the Monty language
 ## Description
-This is a Holberton School partner project with @jayjay823 and @rdsim8589. This is an interpetor for the monty language.The monty language are .m files that excute a command line by line. The purpuse of this is project to understand the concepts of FIFO (First in First Out) and LIFO (Last In First Out).
+This is a Holberton School partner project with @jayjay823 and @rdsim8589. This is an interpetor for the monty byte code.The monty byte code are strored .m files that excute a command line by line. The purpuse of this is project to understand the concepts of FIFO (First in First Out) and LIFO (Last In First Out).
 
 ##How To Use
 ```
@@ -16,7 +16,18 @@ $ ./monty test.m
 ```
 
 ##Completed Features
-
+### Proper useage
+Must pass one file that that exist.
+if non-existant file passed
+```
+$ ./monty no_file.m
+>>> Error: Can't open file no_file
+```
+if no files passed or more than one file passed
+```
+$ ./monty test_1.m test_2.m
+>>> USAGE: monty file
+```
 ### Avaliable opcodes
 format tags must follow the format of [flags][width][.precision][length]specifier
 
@@ -38,24 +49,22 @@ format tags must follow the format of [flags][width][.precision][length]specifie
   <col width="65%">
   <tr>
     <td><b>op codes</b></td>
-    <td><b>Effected Specifers</b></td>
     <td><b>Description and Examples</b> </td>
   </tr>
+
   <tr>
-    <td>-</td>
-    <td>d, i, u, o, x, X, b, c, s</td>
+    <td>push</td>
     <td>
-	Left justify</br>
-	<code>_printf("A%3dlast", 5);</code></br>
-	<code>_printf("A%-3dlast", 5);</code></br>
+	The opcode push pushes an element to the stack.</br>
+	<code>_printf("A%3dlast", 5);></br>
+	_printf("A%-3dlast", 5);</br></code>
 	output</br>
 	<code>$ A  5last</code></br>
         <code>$ A5  last</code></br>
     </td>
   </tr>
   <tr>
-    <td>+</td>
-    <td>d, i</td>
+    <td>pall</td>
     <td>
       Forces proceed to with a sign even if positive</br>
       <code>_printf("A%dlast", 5);</code></br>
@@ -66,7 +75,7 @@ format tags must follow the format of [flags][width][.precision][length]specifie
     </td>
   </tr>
   <tr>
-    <td>(space)</td>
+    <td>pint</td>
     <td>d, i</td>
     <td>
     if no sign is given, proceed with space
@@ -78,8 +87,7 @@ format tags must follow the format of [flags][width][.precision][length]specifie
     </td>
   </tr>
   <tr>
-    <td>#</td>
-    <td>o, x, X </td>
+   <td>pop</td>
     <td>
     Used with o, x or X specifiers the value is preceded with 0, 0x,or 0X respectively for values different than zero.
       <code>_printf("%o, 1");</code></br>
@@ -90,8 +98,139 @@ format tags must follow the format of [flags][width][.precision][length]specifie
     </td>
   </tr>
   <tr>
-    <td>0</td>
-    <td>d, i, u, o, x</td>
+    <td>swap</td>
+    <td>
+     left pad with spaces with 0
+      <code>_printf("A%3dlast", 5);</code></br>
+      <code>_printf("A%03dlast", 5);</code></br>
+    output
+      <code>$ A  5last</code></br>
+      <code>$ A005last</code></br>
+    </td>
+  </tr>
+  <tr>
+    <td>add</td>
+    <td>
+     left pad with spaces with 0
+      <code>_printf("A%3dlast", 5);</code></br>
+      <code>_printf("A%03dlast", 5);</code></br>
+    output
+      <code>$ A  5last</code></br>
+      <code>$ A005last</code></br>
+    </td>
+  </tr>
+  <tr>
+  <td>nop</td>
+    <td>
+     left pad with spaces with 0
+      <code>_printf("A%3dlast", 5);</code></br>
+      <code>_printf("A%03dlast", 5);</code></br>
+    output
+      <code>$ A  5last</code></br>
+      <code>$ A005last</code></br>
+    </td>
+  </tr>
+  <tr>
+    <td>sub</td>
+    <td>
+     left pad with spaces with 0
+      <code>_printf("A%3dlast", 5);</code></br>
+      <code>_printf("A%03dlast", 5);</code></br>
+    output
+      <code>$ A  5last</code></br>
+      <code>$ A005last</code></br>
+    </td>
+  </tr>
+  <tr>
+    <td>div</td>
+    <td>
+     left pad with spaces with 0
+      <code>_printf("A%3dlast", 5);</code></br>
+      <code>_printf("A%03dlast", 5);</code></br>
+    output
+      <code>$ A  5last</code></br>
+      <code>$ A005last</code></br>
+    </td>
+  </tr>
+  <tr>
+    <td>mul</td>
+    <td>
+     left pad with spaces with 0
+      <code>_printf("A%3dlast", 5);</code></br>
+      <code>_printf("A%03dlast", 5);</code></br>
+    output
+      <code>$ A  5last</code></br>
+      <code>$ A005last</code></br>
+    </td>
+  </tr>
+  <tr>
+    <td>mod</td>
+    <td>
+     left pad with spaces with 0
+      <code>_printf("A%3dlast", 5);</code></br>
+      <code>_printf("A%03dlast", 5);</code></br>
+    output
+      <code>$ A  5last</code></br>
+      <code>$ A005last</code></br>
+    </td>
+  </tr>
+  <tr>
+    <td>pchar</td>
+    <td>
+     left pad with spaces with 0
+      <code>_printf("A%3dlast", 5);</code></br>
+      <code>_printf("A%03dlast", 5);</code></br>
+    output
+      <code>$ A  5last</code></br>
+      <code>$ A005last</code></br>
+    </td>
+  </tr>
+  <tr>
+    <td>pstr</td>
+    <td>
+     left pad with spaces with 0
+      <code>_printf("A%3dlast", 5);</code></br>
+      <code>_printf("A%03dlast", 5);</code></br>
+    output
+      <code>$ A  5last</code></br>
+      <code>$ A005last</code></br>
+    </td>
+  </tr>
+  <tr>
+    <td>rotl</td>
+    <td>
+     left pad with spaces with 0
+      <code>_printf("A%3dlast", 5);</code></br>
+      <code>_printf("A%03dlast", 5);</code></br>
+    output
+      <code>$ A  5last</code></br>
+      <code>$ A005last</code></br>
+    </td>
+  </tr>
+  <tr>
+    <td>rotr</td>
+    <td>
+     left pad with spaces with 0
+      <code>_printf("A%3dlast", 5);</code></br>
+      <code>_printf("A%03dlast", 5);</code></br>
+    output
+      <code>$ A  5last</code></br>
+      <code>$ A005last</code></br>
+    </td>
+  </tr>
+  <tr>
+    <td>queue</td>
+    <td>
+     left pad with spaces with 0
+      <code>_printf("A%3dlast", 5);</code></br>
+      <code>_printf("A%03dlast", 5);</code></br>
+    output
+      <code>$ A  5last</code></br>
+      <code>$ A005last</code></br>
+    </td>
+  </tr>
+  <tr>
+    <td>stack</td>
     <td>
      left pad with spaces with 0
       <code>_printf("A%3dlast", 5);</code></br>
@@ -104,62 +243,8 @@ format tags must follow the format of [flags][width][.precision][length]specifie
 </table>
 
 
-<table class="tg">
-  <col width="45%">
-  <col width="65%">
-  <tr>
-    <td><b>width</b></td>
-    <td><b>Effected Specifers</b></td>
-    <td><b>Description and Examples</b> </td>
-  </tr>
-  <tr>
-    <td>-</td>
-    <td>d, i, u, o, x, X, b, c, s</td>
-    <td>
-	minimum number to be printed</br>
-	<code>_printf("A%dlast", 5);</code></br>
-	<code>_printf("A%3dlast", 5);</code></br>
-	output</br>
-	<code>$ A5last</code></br>
-        <code>$ A  5last</code></br>
-    </td>
-  </tr>
-</table>
-
-<table class="tg">
-  <col width="45%">
-  <col width="65%">
-  <tr>
-    <td><b>.percision</b></td>
-    <td><b>Effected Specifers</b></td>
-    <td><b>Description and Examples</b> </td>
-  </tr>
-  <tr>
-    <td>-</td>
-    <td>d, i, u, o, x, X, s</td>
-    <td>
-	For integer specifiers (d, i, o, u, x, X) − precision specifies the minimum number of digits to be written. If the value to be written is shorter than this number, the result is padded with leading zeros.</br>
-	<code>_printf("A%dlast", 5);</code></br>
-	<code>_printf("A%.3dlast", 5);</code></br>
-	output</br>
-	<code>$ A5last</code></br>
-        <code>$ A005last</code></br>
-	</br>
-	For s − this is the maximum number of characters to be printed.</br>
-	<code>_printf("A%s", "Holberton");</code></br>
-	<code>_printf("A%.3s", "Holberton");</code></br>
-	output</br>
-	<code>$ Holberton</code></br>
-        <code>$ Hol</code></br>
-    </td>
-  </tr>
-</table>
-##Future features
-format tags -, +, (space), #, and width for the pointer flag
-implement the length format tags
-
 ##Contributors
-*Justin Marsh* - [Github](https://github.com/j-tyler) || [Twitter](https://twitter.com/dogonthecircuit) || [email](justin.marsh@holbertonschool.com)
+*Jay Wang* - [Github](https://github.com/jayjay823) || [Twitter](https://twitter.com/jianqinwang94) || [email](jianqin.wang@holbertonschool.com)
 
 *Richard Sim* - [Github](https://github.com/rdsim8589) || [Twitter](https://twitter.com/richard_d_sim) || [email](richard.sim@holbertonschool.com)
 
