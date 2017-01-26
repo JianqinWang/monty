@@ -56,7 +56,8 @@ The default method of storing will be the stack
   <tr>
     <td>push</td>
     <td>
-	The opcode push pushes an element to the stack.</br>
+	The opcode push pushes an element to the stack.</br></br>
+	Example:</br>
 		<code> $cat test_1.m</code></br>
 		<code> >>> push 1</code></br>
 		<code> >>> push 2</code></br>
@@ -74,7 +75,8 @@ The default method of storing will be the stack
   <tr>
     <td>pall</td>
     <td>
-	The opcode pall prints all the values on the stack, starting from the top of the stack.</br>
+	The opcode pall prints all the values on the stack, starting from the top of the stack.</br></br>
+	Example:</br>
 		<code> $cat test_1.m</code></br>
 		<code> >>> push 1</code></br>
 		<code> >>> push 2</code></br>
@@ -89,7 +91,8 @@ The default method of storing will be the stack
   <tr>
     <td>pint</td>
     <td>
-	The opcode pint prints the value at the top of the stack, followed by a new line.</br>
+	The opcode pint prints the value at the top of the stack, followed by a new line.</br></br>
+	Example:</br>
 		<code> $cat test_1.m</code></br>
 		<code> >>> push 1</code></br>
 		<code> >>> push 2</code></br>
@@ -106,7 +109,8 @@ The default method of storing will be the stack
   <tr>
    <td>pop</td>
     <td>
-        The opcode pop removes the top element of the stack.</br>
+        The opcode pop removes the top element of the stack.</br></br>
+	Example:</br>
 		<code> $cat test_1.m</code></br>
 		<code> >>> push 1</code></br>
 		<code> >>> push 2</code></br>
@@ -123,10 +127,12 @@ The default method of storing will be the stack
 	<code>L(line_number): can't pop an empty stack</code></br>
     </td>
   </tr>
+
   <tr>
     <td>swap</td>
     <td>
-	The opcode swap swaps the top two elements of the stack.</br>
+	The opcode swap swaps the top two elements of the stack.</br></br>
+	Example:</br>
 		<code> $cat test_1.m</code></br>
 		<code> >>> push 1</code></br>
 		<code> >>> push 2</code></br>
@@ -148,7 +154,8 @@ The default method of storing will be the stack
   <tr>
     <td>add</td>
     <td>
-	The opcode add adds the top two elements of the stack. The two elements will be replaced with one element that is the sum of the two elements. The stack is now one element shorter.</br>
+	The opcode add adds the top two elements of the stack. The two elements will be replaced with one element that is the sum of the two elements. The stack is now one element shorter.</br></br>
+	Example:</br>
 		<code> $cat test_1.m</code></br>
 		<code> >>> push 1</code></br>
 		<code> >>> push 2</code></br>
@@ -169,17 +176,20 @@ The default method of storing will be the stack
   <tr>
   <td>nop</td>
     <td>
-	The opcode nop doesn't do anything</br>
+	The opcode nop doesn't do anything</br></br>
+	Example:</br>
 		<code> $cat test_1.m</code></br>
 		<code> >>> nop</code></br>
 	output</br>
 		<code> $ ./monty test_1.m</code></br>
     </td>
   </tr>
+
   <tr>
     <td>sub</td>
     <td>
-	The opcode sub subtracts the top elements from second top element of the stack. The two elements will be replaced with one element that is the subtraction of the two elements. The stack is now one element shorter.</br>
+	The opcode sub subtracts the top elements from second top element of the stack. The two elements will be replaced with one element that is the subtraction of the two elements. The stack is now one element shorter.</br></br>
+	Example:</br>
 		<code> $cat test_1.m</code></br>
 		<code> >>> push 1</code></br>
 		<code> >>> push 2</code></br>
@@ -196,10 +206,12 @@ The default method of storing will be the stack
 	<code>L(line_number): can't sub, stack too short</code></br>
 
   </tr>
+
   <tr>
     <td>div</td>
     <td>
-	The opcode div divides the seconds top element by the top element of the stack. The two elements will be replaced with one element that is the division of the two elements. The stack is now one element shorter.</br>
+	The opcode div divides the seconds top element by the top element of the stack. The two elements will be replaced with one element that is the division of the two elements. The stack is now one element shorter.</br></br>
+	Example:</br>
 		<code> $cat test_1.m</code></br>
 		<code> >>> push 6</code></br>
 		<code> >>> push 2</code></br>
@@ -223,7 +235,8 @@ The default method of storing will be the stack
   <tr>
     <td>mul</td>
     <td>
-	The opcode mul multiplies the second top element of the stack with the top element of the stack. The two elements will be replaced with one element that is the division of the two elements. The stack is now one element shorter.</br>
+	The opcode mul multiplies the second top element of the stack with the top element of the stack. The two elements will be replaced with one element that is the division of the two elements. The stack is now one element shorter.</br></br>
+	Example:</br>
 		<code> $cat test_1.m</code></br>
 		<code> >>> push 6</code></br>
 		<code> >>> push 2</code></br>
@@ -244,7 +257,8 @@ The default method of storing will be the stack
   <tr>
     <td>mod</td>
     <td>
-	The opcode mod computes the rest of the division of the second top element of the stack by the top element of the stack. The two elements will be replaced with one element that is the division of the two elements. The stack is now one element shorter.</br>
+	The opcode mod computes the rest of the division of the second top element of the stack by the top element of the stack. The two elements will be replaced with one element that is the division of the two elements. The stack is now one element shorter.</br></br>
+	Example:</br>
 		<code> $cat test_1.m</code></br>
 		<code> >>> push 6</code></br>
 		<code> >>> push 2</code></br>
@@ -268,7 +282,8 @@ The default method of storing will be the stack
   <tr>
     <td>#</td>
     <td>
-	When the first non-space character of a line is #,  this line is treated a comment (don't do anything)
+	When the first non-space character of a line is #,  this line is treated a comment (don't do anything)</br></br>
+	Example:</br>
 		<code> $cat test_1.m</code></br>
 		<code> >>> # Nothing will print</code></br>
 	output</br>
@@ -280,7 +295,8 @@ The default method of storing will be the stack
   <tr>
     <td>pchar</td>
     <td>
-	The opcode pchar prints the ascii character of element at the top of the stack, followed by a new line.</br>
+	The opcode pchar prints the ascii character of element at the top of the stack, followed by a new line.</br></br>
+	Example:</br>
 		<code> $cat test_1.m</code></br>
 		<code> >>> push 72</code></br>
 		<code> >>> pchar</code></br>
@@ -298,7 +314,8 @@ The default method of storing will be the stack
   <tr>
     <td>pstr</td>
     <td>
-	The opcode pstr prints the string starting at the top of the stack. The int values will be treated as ascii value characters. The string will stop when the stack is over, the values of the element is 0 or not in the ascii table. </br>
+	The opcode pstr prints the string starting at the top of the stack. The int values will be treated as ascii value characters. The string will stop when the stack is over, the values of the element is 0 or not in the ascii table. </br></br>
+	Example:</br>
 		<code> $cat test_1.m</code></br>
 		<code> >>> push 0</code></br>
 		<code> >>> push 65</code></br>
@@ -317,7 +334,8 @@ The default method of storing will be the stack
   <tr>
     <td>rotl</td>
     <td>
-	The opcode rotl rotates the stack to the top. The top element of the stack becomes the last one, and the second top element of the stack becomes the first one.</br>
+	The opcode rotl rotates the stack to the top. The top element of the stack becomes the last one, and the second top element of the stack becomes the first one.</br></br>
+	Example:</br>
 		<code> $cat test_1.m</code></br>
 		<code> >>> push 0</code></br>
 		<code> >>> push 1</code></br>
@@ -341,7 +359,8 @@ The default method of storing will be the stack
   <tr>
     <td>rotr</td>
     <td>
-	The opcode rotr rotates the stack to the bottom. The last element of the stack becomes the top element of the stack.</br>
+	The opcode rotr rotates the stack to the bottom. The last element of the stack becomes the top element of the stack.</br></br>
+	Example:</br>
 		<code> $cat test_1.m</code></br>
 		<code> >>> push 0</code></br>
 		<code> >>> push 1</code></br>
@@ -364,7 +383,8 @@ The default method of storing will be the stack
   </tr>
   <tr>
     <td>queue</td>
-	The opcode queue sets the format of the data to a queue (FIFO).</br>
+	The opcode queue sets the format of the data to a queue (FIFO).</br></br>
+	Example:</br>
 		<code> $cat test_1.m</code></br>
 		<code> >>> queue</code></br>
 		<code> >>> push 0</code></br>
@@ -385,7 +405,8 @@ The default method of storing will be the stack
   <tr>
     <td>stack</td>
     <td>
-        The opcode stack sets the format of the data to a stack (LIFO). This is the default behavior of the program.</br> 
+        The opcode stack sets the format of the data to a stack (LIFO). This is the default behavior of the program.</br></br>
+	Example:</br>
 		<code> $cat test_1.m</code></br>
 		<code> >>> stack</code></br>
 		<code> >>> push 0</code></br>
