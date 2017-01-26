@@ -57,7 +57,7 @@ $ ./monty test_1.m
     <td>
 	The opcode push pushes an element to the stack.</br>
 	<code> $cat test_1.m</code></br>
-	<code> >>> push 1<code></br>
+	<code> >>> push 1</code></br>
 	<code> >>> push 2</code></br>
 	<code> >>> pall</code></br>
 	output</br>
