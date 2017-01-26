@@ -44,7 +44,7 @@ void _pchar(stack_t **head, unsigned int line_number)
 	temp = find_end(head);
 	if (temp == NULL)
 	{
-		printf("L%u: can't pchar, value out of range\n", line_number);
+		printf("L%u: can't pchar, stack empty\n", line_number);
 		free_stack(head);
 		exit(EXIT_FAILURE);
 	}
@@ -73,7 +73,6 @@ void _pstr(stack_t **head, unsigned int line_number)
 	while (temp != NULL && temp->n > 0 && temp->n <= 127)
 	{
 		printf("%c", temp->n);
-		free_stack(head);
 		temp = temp->prev;
 	}
 	printf("\n");
@@ -96,7 +95,6 @@ void _rotl(stack_t **head, unsigned int line_number)
 	add_node(head, temp->n);
 	while (temp != NULL)
 	{
-		printf("rotl %d\n", temp->n);
 		temp = temp->prev;
 	}
 	_pop(head, line_number);

@@ -1,6 +1,6 @@
 #include "monty.h"
 
-int glob[] = {0, 0};
+long int glob[] = {0, 0};
 /**
  * main - the main execution frame for monty interpreter
  * @argc: number of arguments read from command line
@@ -39,27 +39,22 @@ int main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 	line_num = 1;
-	printf("begin reading\n");
 	while ((read = getline(&line, &len, fp)) != -1)
 	{
 		cmd_stat = 0;
-		printf("begin reading file\n");
-		if (strlen(line) == 1)
-			break;
+		if (strlen(line) == 1 || strspn(line, " \r\n\t") == strlen(line))
+			continue;
 		cmd = get_cmd(line, line_num);
-		printf("got the cmd %s\n", cmd);
 		for (j = 0; j < 17; j++)
 		{
 			if (cmd[0] == '#')
 				break;
 			if (strcmp(instruct[j].opcode, cmd) == 0)
 			{
-				printf("found function\n");
 				instruct[j].f(&head, line_num);
 				cmd_stat = 1;
 				break;
 			}
-			printf("%s\n%s\n%d\n", cmd, instruct[j].opcode, strcmp(instruct[j].opcode, cmd));
 		}
 		if (cmd_stat == 0)
 		{
@@ -67,13 +62,10 @@ int main(int argc, char **argv)
 			free_stack(&head);
 			exit(EXIT_FAILURE);
 		}
-		printf("break loop\n");
 		line_num++;
-		printf("linenum change\n");
 	}
 	free_stack(&head);
 	fclose(fp);
-	if (line)
-		free(line);
-	free_stack(&head);
+
+	exit(EXIT_SUCCESS);
 }

@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <errno.h>
+#include <limits.h>
 
 #ifndef MONTY_H
 #define MONTY_H
@@ -38,7 +39,7 @@ typedef struct instruction_s
 } instruction_t;
 
 /* initialize global array */
-extern int glob[];
+extern long int glob[];
 
 /* push function */
 void _push(stack_t **head, unsigned int line_number);

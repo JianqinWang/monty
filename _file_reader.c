@@ -7,34 +7,28 @@
  */
 char *get_cmd(char *line, unsigned int line_num)
 {
-	int i;
+	long int i;
 	char *ptr;
 	char *t, *temp_num;
 
-	printf("enter get_cmd\n");
 	t = strtok(line, " \n\t");
-	printf("glob is %d %d\n", glob[0], glob[1]);
 	if (strcmp(t, "push") == 0)
 	{
-		printf("enter\n");
 		temp_num = strtok(NULL, " ");
-		printf("temp_num is %s\n", temp_num);
-		if (temp_num == NULL || strlen(temp_num) == 1)
+		if (temp_num == NULL)
 		{
 			printf("L%u: usage: push integer\n", line_num);
 			exit(EXIT_FAILURE);
 		}
 		i = strtol(temp_num, &ptr, 10);
-		printf("errno is %d\n", errno);
 		if (errno == ERANGE || (*ptr != '\0' && *ptr != '\n'
-					&& *ptr != ' ' && *ptr != '\t'))
+					&& *ptr != ' ' && *ptr != '\t')
+			|| i > INT_MAX || i < INT_MIN)
 		{
 			printf("L%u: usage: push integer\n", line_num);
 			exit(EXIT_FAILURE);
 		}
 		glob[0] = i;
-		printf("set global\n");
 	}
-	printf("going to exit get_cmd\n");
 	return t;
 }
