@@ -57,7 +57,7 @@ format tags must follow the format of [flags][width][.precision][length]specifie
     <td>
 	The opcode push pushes an element to the stack.</br>
 	<code>_printf("A%3dlast", 5);></br>
-	_printf("A%-3dlast", 5);</br></code>
+	_printf("A%-3dlast", 5);</br></code></br>
 	output</br>
 	<code>$ A  5last</code></br>
         <code>$ A5  last</code></br>
