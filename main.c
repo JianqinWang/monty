@@ -1,6 +1,6 @@
-#include "monty.h"
+ #include "monty.h"
 
-long int glob[] = {0, 0};
+long int glob[] = {0, 0, 0};
 /**
  * main - the main execution frame for monty interpreter
  * @argc: number of arguments read from command line
@@ -39,13 +39,13 @@ int main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 	line_num = 1;
-	while ((read = getline(&line, &len, fp)) != -1)
+	while ((read = getline(&line, &len, fp)) != -1 && glob[2] != 1)
 	{
 		cmd_stat = 0;
 		if (strlen(line) == 1 || strspn(line, " \r\n\t") == strlen(line))
 			continue;
 		cmd = get_cmd(line, line_num);
-		for (j = 0; j < 17; j++)
+		for (j = 0; j < 17 && cmd != NULL; j++)
 		{
 			if (cmd[0] == '#')
 				break;
@@ -59,13 +59,15 @@ int main(int argc, char **argv)
 		if (cmd_stat == 0)
 		{
 			printf("L%u: unknown instruction %s\n", line_num, cmd);
-			free_stack(&head);
-			exit(EXIT_FAILURE);
+			glob[2] = 1;
+			continue;
 		}
 		line_num++;
 	}
+	free(line);
 	free_stack(&head);
 	fclose(fp);
-
+	if (glob[2] == 1)
+		exit(EXIT_FAILURE);
 	exit(EXIT_SUCCESS);
 }
