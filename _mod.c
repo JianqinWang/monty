@@ -15,15 +15,15 @@ void _mod(stack_t **head, unsigned int line_number)
 	if (temp == NULL || temp->prev == NULL)
 	{
 		printf("L%u: can't mod, stack too short\n", line_number);
-		free_stack(head);
-		exit(EXIT_FAILURE);
+		glob[2] = 1;
+		return;
 	}
 	helper = temp->prev;
 	if (temp->n == 0)
 	{
 		printf("L%u: division by zero\n", line_number);
-		free_stack(head);
-		exit(EXIT_FAILURE);
+		glob[2] = 1;
+		return;
 	}
 	i = helper->n % temp->n;
 	_pop(head, line_number);
@@ -45,16 +45,16 @@ void _pchar(stack_t **head, unsigned int line_number)
 	if (temp == NULL)
 	{
 		printf("L%u: can't pchar, stack empty\n", line_number);
-		free_stack(head);
-		exit(EXIT_FAILURE);
+		glob[2] = 1;
+		return;
 	}
 	if (temp->n >= 32 && temp->n <= 127)
 		printf("%c\n", temp->n);
 	else
 	{
 		printf("L%u: can't pchar, value out of range\n", line_number);
-		free_stack(head);
-		exit(EXIT_FAILURE);
+		glob[2] = 1;
+		return;
 	}
 }
 

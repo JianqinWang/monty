@@ -15,8 +15,8 @@ stack_t *add_node_end(stack_t **head, const int n)
 	if (new_node == NULL)
 	{
 		printf("Error: malloc failed\n");
-		free_stack(head);
-		exit(EXIT_FAILURE);
+		glob[2] = 1;
+		return(NULL);
 	}
 	new_node->n = n;
 	new_node->prev = NULL;
@@ -67,8 +67,8 @@ stack_t *add_node(stack_t **head, const int n)
 	if (new_node == NULL)
 	{
 		printf("Error: malloc failed\n");
-		free_stack(head);
-		exit(EXIT_FAILURE);
+		printf("Error: malloc failed\n");
+		glob[2] = 1;
 	}
 	new_node->prev = NULL;
 	new_node->next = *head;

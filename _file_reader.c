@@ -18,7 +18,8 @@ char *get_cmd(char *line, unsigned int line_num)
 		if (temp_num == NULL)
 		{
 			printf("L%u: usage: push integer\n", line_num);
-			exit(EXIT_FAILURE);
+			glob[2] = 1;
+			return(NULL);
 		}
 		i = strtol(temp_num, &ptr, 10);
 		if (errno == ERANGE || (*ptr != '\0' && *ptr != '\n'
@@ -26,7 +27,8 @@ char *get_cmd(char *line, unsigned int line_num)
 			|| i > INT_MAX || i < INT_MIN)
 		{
 			printf("L%u: usage: push integer\n", line_num);
-			exit(EXIT_FAILURE);
+			glob[2] = 1;
+			return(NULL);
 		}
 		glob[0] = i;
 	}
