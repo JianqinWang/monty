@@ -56,7 +56,7 @@ int main(int argc, char **argv)
 				break;
 			}
 		}
-		if (cmd_stat == 0)
+		if (cmd_stat == 0 && cmd[0] != '#')
 		{
 			printf("L%u: unknown instruction %s\n", line_num, cmd);
 			glob[2] = 1;
