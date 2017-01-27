@@ -96,7 +96,7 @@ void _swap(stack_t **head, unsigned int line_number)
 	int help;
 
 	temp = find_end(head);
-	if (temp == NULL || temp->prev == NULL )
+	if (temp == NULL || temp->prev == NULL)
 	{
 		printf("L%u: can't swap, stack too short\n", line_number);
 		glob[2] = 1;

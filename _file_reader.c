@@ -19,7 +19,7 @@ char *get_cmd(char *line, unsigned int line_num)
 		{
 			printf("L%u: usage: push integer\n", line_num);
 			glob[2] = 1;
-			return(NULL);
+			return (NULL);
 		}
 		i = strtol(temp_num, &ptr, 10);
 		if (errno == ERANGE || (*ptr != '\0' && *ptr != '\n'
@@ -28,9 +28,9 @@ char *get_cmd(char *line, unsigned int line_num)
 		{
 			printf("L%u: usage: push integer\n", line_num);
 			glob[2] = 1;
-			return(NULL);
+			return (NULL);
 		}
 		glob[0] = i;
 	}
-	return t;
+	return (t);
 }
