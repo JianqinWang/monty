@@ -1,163 +1,432 @@
 #Holberton School Project - interpetor for the Monty language
 ## Description
-This is a Holberton School partner project with @jayjay823 and @rdsim8589. This is an interpetor for the monty language.The monty language are .m files that excute a command line by line. The purpuse of this is project to understand the concepts of FIFO (First in First Out) and LIFO (Last In First Out).
+This is a Holberton School partner project with @jayjay823 and @rdsim8589. This is an interpetor for the monty byte code.The monty byte code are strored .m files that excute a command line by line. The purpuse of this is project to understand the concepts of FIFO (First in First Out) and LIFO (Last In First Out).
 
 ##How To Use
 ```
-$ git clone git@github.com:j-tyler/printf.git
+$ git clone git@github.com:jayjay823/monty.git
 ```
-compile everything within the directory and use _printf instead of printf
+compile everything within the directory that ends with .c
 ```
-$ gcc -Wall -Werror -Wextra -pedantic *.c
+$ gcc -Wall -Werror -Wextra -pedantic *.c -o monty
 ```
-##Declaration
-int _printf(const char *format, ...)
+run the binary file monty with the .m file (only accepts one file at a time)
+```
+$ ./monty test.m
+```
 
 ##Completed Features
+### Proper usage
+Must pass one file that that exist.
+if non-existant file passed
+```
+$ ./monty no_file.m
+>>> Error: Can't open file no_file
+```
+if no files passed or more than one file passed
+```
+$ ./monty test_1.m test_2.m
+>>> USAGE: monty file
+```
 
-###Format tags
-format tags must follow the format of [flags][width][.precision][length]specifier
+Files must contain valid opcode
+If invalid given
+```
+$cat test_1.m
+>>> bad_fun
+>>> push 2
+>>> pall
+$ ./monty test_1.m
+>>> L1: unknown instruction bad_fun
+```
 
-| **specifier** | **output**                            |
-|---------------|---------------------------------------|
-| c             | characters                            |
-| s		| string of characters                  |
-| i or d        | signed decimal int                    |
-| u             | unsigned decimal int                  |
-| o             | signed octal                          |
-| x             | unsigned hexadecimal int              |
-| X             | unsigned hexadecimal int (Upper Case) |
-| b             | Binary                                |
-| p             | pointer address                       |
+The default method of storing will be the stack
+
+### Avaliable opcodes
 
 
 <table class="tg">
   <col width="45%">
   <col width="65%">
   <tr>
-    <td><b>Flags</b></td>
-    <td><b>Effected Specifers</b></td>
+    <td><b>op codes</b></td>
     <td><b>Description and Examples</b> </td>
   </tr>
+
   <tr>
-    <td>-</td>
-    <td>d, i, u, o, x, X, b, c, s</td>
+    <td>push</td>
     <td>
-	Left justify</br>
-	<code>_printf("A%3dlast", 5);</code></br>
-	<code>_printf("A%-3dlast", 5);</code></br>
+	The opcode push pushes an element to the stack.</br></br>
+	Example:</br>
+		<pre><code>$cat test_1.m
+>>> push 1
+>>> push 2
+>>> pall</code></pre>
 	output</br>
-	<code>$ A  5last</code></br>
-        <code>$ A5  last</code></br>
+		<pre><code>$ ./monty test_1.m
+>>> 1
+>>> 2</code></pre>
+
+	if push is not followed a negative or postive int, output will be:</br>
+	<code>L(line_number): usage: push integer<code></br>
     </td>
   </tr>
+
   <tr>
-    <td>+</td>
-    <td>d, i</td>
+    <td>pall</td>
     <td>
-      Forces proceed to with a sign even if positive</br>
-      <code>_printf("A%dlast", 5);</code></br>
-      <code>_printf("A%+dlast", 5);</code></br>
-    output</br>
-      <code>$ A5last</code></br>
-      <code>$ A+5last</code></br>
+	The opcode pall prints all the values on the stack, starting from the top of the stack.</br></br>
+	Example:</br>
+		<code> $cat test_1.m</code></br>
+		<code> >>> push 1</code></br>
+		<code> >>> push 2</code></br>
+		<code> >>> pall</code></br>
+	output</br>
+		<code> $ ./monty test_1.m</code></br>
+		<code> >>> 1</code></br>
+		<code> >>> 2</code></br>
     </td>
   </tr>
+
   <tr>
-    <td>(space)</td>
-    <td>d, i</td>
+    <td>pint</td>
     <td>
-    if no sign is given, proceed with space
-      <code>_printf("A%dlast", 5);</code></br>
-      <code>_printf("A% dlast", 5);</code></br>
-    output
-      <code>$ A5last</code></br>
-      <code>$ A 5last</code></br>
+	The opcode pint prints the value at the top of the stack, followed by a new line.</br></br>
+	Example:</br>
+		<code> $cat test_1.m</code></br>
+		<code> >>> push 1</code></br>
+		<code> >>> push 2</code></br>
+		<code> >>> pint</code></br>
+	output</br>
+		<code> $ ./monty test_1.m</code></br>
+		<code> >>> 2</code></br>
+
+	If stack empty, output will be:</br>
+	<code>L(line_number): can't pint, stack empty</code>
     </td>
   </tr>
+
+  <tr>
+   <td>pop</td>
+    <td>
+        The opcode pop removes the top element of the stack.</br></br>
+	Example:</br>
+		<code> $cat test_1.m</code></br>
+		<code> >>> push 1</code></br>
+		<code> >>> push 2</code></br>
+		<code> >>> pall</code></br>
+		<code> >>> pop</code></br>
+		<code> >>> pall</code></br>
+	output</br>
+		<code> $ ./monty test_1.m</code></br>
+		<code> >>> 2</code></br>
+		<code> >>> 1</code></br>
+		<code> >>> 1</code></br>
+
+	If stack is empty, output will be</br>
+	<code>L(line_number): can't pop an empty stack</code></br>
+    </td>
+  </tr>
+
+  <tr>
+    <td>swap</td>
+    <td>
+	The opcode swap swaps the top two elements of the stack.</br></br>
+	Example:</br>
+		<code> $cat test_1.m</code></br>
+		<code> >>> push 1</code></br>
+		<code> >>> push 2</code></br>
+		<code> >>> pall</code></br>
+		<code> >>> swap</code></br>
+		<code> >>> pall</code></br>
+	output</br>
+		<code> $ ./monty test_1.m</code></br>
+		<code> >>> 2</code></br>
+		<code> >>> 1</code></br>
+		<code> >>> 1</code></br>
+		<code> >>> 2</code></br>
+
+	If the stack is less than two elements long, output will be:</br>
+	<code>L(line_number): can't swap, stack too short</code></br>
+    </td>
+  </tr>
+
+  <tr>
+    <td>add</td>
+    <td>
+	The opcode add adds the top two elements of the stack. The two elements will be replaced with one element that is the sum of the two elements. The stack is now one element shorter.</br></br>
+	Example:</br>
+		<code> $cat test_1.m</code></br>
+		<code> >>> push 1</code></br>
+		<code> >>> push 2</code></br>
+		<code> >>> pall</code></br>
+		<code> >>> add</code></br>
+		<code> >>> pall</code></br>
+	output</br>
+		<code> $ ./monty test_1.m</code></br>
+		<code> >>> 2</code></br>
+		<code> >>> 1</code></br>
+		<code> >>> 3</code></br>
+
+	If the stack is less than two elements long, output will be: </br>
+	<code>L(line_number): can't add, stack too short</code></br>
+    </td>
+  </tr>
+
+  <tr>
+  <td>nop</td>
+    <td>
+	The opcode nop doesn't do anything</br></br>
+	Example:</br>
+		<code> $cat test_1.m</code></br>
+		<code> >>> nop</code></br>
+	output</br>
+		<code> $ ./monty test_1.m</code></br>
+    </td>
+  </tr>
+
+  <tr>
+    <td>sub</td>
+    <td>
+	The opcode sub subtracts the top elements from second top element of the stack. The two elements will be replaced with one element that is the subtraction of the two elements. The stack is now one element shorter.</br></br>
+	Example:</br>
+		<code> $cat test_1.m</code></br>
+		<code> >>> push 1</code></br>
+		<code> >>> push 2</code></br>
+		<code> >>> pall</code></br>
+		<code> >>> sub</code></br>
+		<code> >>> pall</code></br>
+	output</br>
+		<code> $ ./monty test_1.m</code></br>
+		<code> >>> 2</code></br>
+		<code> >>> 1</code></br>
+		<code> >>> -1</code></br>
+
+	If the stack is less than two elements long, output will be: </br>
+	<code>L(line_number): can't sub, stack too short</code></br>
+
+  </tr>
+
+  <tr>
+    <td>div</td>
+    <td>
+	The opcode div divides the seconds top element by the top element of the stack. The two elements will be replaced with one element that is the division of the two elements. The stack is now one element shorter.</br></br>
+	Example:</br>
+		<code> $cat test_1.m</code></br>
+		<code> >>> push 6</code></br>
+		<code> >>> push 2</code></br>
+		<code> >>> pall</code></br>
+		<code> >>> div</code></br>
+		<code> >>> pall</code></br>
+	output</br>
+		<code> $ ./monty test_1.m</code></br>
+		<code> >>> 2</code></br>
+		<code> >>> 6</code></br>
+		<code> >>> 3</code></br>
+
+	If the stack is less than two elements long, output will be: </br>
+	<code>L(line_number): can't div, stack too short</code></br>
+
+	If the the top element of the stack is 0, output will be:</br>
+	<code>L(line_number): division by zero</code></br>
+    </td>
+  </tr>
+
+  <tr>
+    <td>mul</td>
+    <td>
+	The opcode mul multiplies the second top element of the stack with the top element of the stack. The two elements will be replaced with one element that is the division of the two elements. The stack is now one element shorter.</br></br>
+	Example:</br>
+		<code> $cat test_1.m</code></br>
+		<code> >>> push 6</code></br>
+		<code> >>> push 2</code></br>
+		<code> >>> pall</code></br>
+		<code> >>> mul</code></br>
+		<code> >>> pall</code></br>
+	output</br>
+		<code> $ ./monty test_1.m</code></br>
+		<code> >>> 2</code></br>
+		<code> >>> 6</code></br>
+		<code> >>> 12</code></br>
+	If the stack is less than two elements long, output will be: </br>
+	<code>L(line_number): can't mul, stack too short</code></br>
+
+    </td>
+  </tr>
+
+  <tr>
+    <td>mod</td>
+    <td>
+	The opcode mod computes the rest of the division of the second top element of the stack by the top element of the stack. The two elements will be replaced with one element that is the division of the two elements. The stack is now one element shorter.</br></br>
+	Example:</br>
+		<code> $cat test_1.m</code></br>
+		<code> >>> push 6</code></br>
+		<code> >>> push 2</code></br>
+		<code> >>> pall</code></br>
+		<code> >>> mod</code></br>
+		<code> >>> pall</code></br>
+	output</br>
+		<code> $ ./monty test_1.m</code></br>
+		<code> >>> 2</code></br>
+		<code> >>> 6</code></br>
+		<code> >>> 0</code></br>
+
+	If the stack is less than two elements long, output will be:</br>
+	<code>L(line_number): can't mod, stack too short</code></br>
+
+	If the the top element of the stack is 0, output will be:</br>
+	<code>L(line_number): division by zero</code></br>
+    </td>
+  </tr>
+
   <tr>
     <td>#</td>
-    <td>o, x, X </td>
     <td>
-    Used with o, x or X specifiers the value is preceded with 0, 0x,or 0X respectively for values different than zero.
-      <code>_printf("%o, 1");</code></br>
-      <code>_printf("%#o, 1");</code></br>
-    output
-      <code>$1</code></br>
-      <code>$01</code></br>
+	When the first non-space character of a line is #,  this line is treated a comment (don't do anything)</br></br>
+	Example:</br>
+		<code> $cat test_1.m</code></br>
+		<code> >>> # Nothing will print</code></br>
+	output</br>
+		<code> $ ./monty test_1.m</code></br>
+
+    </td>
+  </tr>
+
+  <tr>
+    <td>pchar</td>
+    <td>
+	The opcode pchar prints the ascii character of element at the top of the stack, followed by a new line.</br></br>
+	Example:</br>
+		<code> $cat test_1.m</code></br>
+		<code> >>> push 72</code></br>
+		<code> >>> pchar</code></br>
+	output</br>
+		<code> $ ./monty test_1.m</code></br>
+		<code> >>> H</code></br>
+
+	If stack is empty, output will be:</br>
+	<code>L(line_number): can't pchar an empty stack</code></br>
+
+	If the value is not in the ascii table (man ascii), output will be:</br>
+	<code>L(line_number): can't pchar, value out of range</code></br>
     </td>
   </tr>
   <tr>
-    <td>0</td>
-    <td>d, i, u, o, x</td>
+    <td>pstr</td>
     <td>
-     left pad with spaces with 0
-      <code>_printf("A%3dlast", 5);</code></br>
-      <code>_printf("A%03dlast", 5);</code></br>
-    output
-      <code>$ A  5last</code></br>
-      <code>$ A005last</code></br>
+	The opcode pstr prints the string starting at the top of the stack. The int values will be treated as ascii value characters. The string will stop when the stack is over, the values of the element is 0 or not in the ascii table. </br></br>
+	Example:</br>
+		<code> $cat test_1.m</code></br>
+		<code> >>> push 0</code></br>
+		<code> >>> push 65</code></br>
+		<code> >>> push 72</code></br>
+		<code> >>> pstr</code></br>
+	output</br>
+		<code> $ ./monty test_1.m</code></br>
+		<code> >>> HA</code></br>
+
+	If the stack is empty, output will be:</br>
+	<code> >>> </code></br>
+
+    </td>
+  </tr>
+
+  <tr>
+    <td>rotl</td>
+    <td>
+	The opcode rotl rotates the stack to the top. The top element of the stack becomes the last one, and the second top element of the stack becomes the first one.</br></br>
+	Example:</br>
+		<code> $cat test_1.m</code></br>
+		<code> >>> push 0</code></br>
+		<code> >>> push 1</code></br>
+		<code> >>> push 2</code></br>
+		<code> >>> push 3</code></br>
+		<code> >>> pall</code></br>
+		<code> >>> rotl</code></br>
+		<code> >>> pall</code></br>
+	output</br>
+		<code> $ ./monty test_1.m</code></br>
+		<code> >>> 3</code></br>
+		<code> >>> 2</code></br>
+		<code> >>> 1</code></br>
+		<code> >>> 0</code></br>
+		<code> >>> 2</code></br>
+		<code> >>> 1</code></br>
+		<code> >>> 0</code></br>
+		<code> >>> 3</code></br>
+    </td>
+  </tr>
+  <tr>
+    <td>rotr</td>
+    <td>
+	The opcode rotr rotates the stack to the bottom. The last element of the stack becomes the top element of the stack.</br></br>
+	Example:</br>
+		<code> $cat test_1.m</code></br>
+		<code> >>> push 0</code></br>
+		<code> >>> push 1</code></br>
+		<code> >>> push 2</code></br>
+		<code> >>> push 3</code></br>
+		<code> >>> pall</code></br>
+		<code> >>> rotr</code></br>
+		<code> >>> pall</code></br>
+	output</br>
+		<code> $ ./monty test_1.m</code></br>
+		<code> >>> 3</code></br>
+		<code> >>> 2</code></br>
+		<code> >>> 1</code></br>
+		<code> >>> 0</code></br>
+		<code> >>> 0</code></br>
+		<code> >>> 3</code></br>
+		<code> >>> 2</code></br>
+		<code> >>> 1</code></br>
+    </td>
+  </tr>
+  <tr>
+    <td>queue</td>
+    <td>
+	The opcode queue sets the format of the data to a queue (FIFO).</br></br>
+	Example:</br>
+		<code> $cat test_1.m</code></br>
+		<code> >>> queue</code></br>
+		<code> >>> push 0</code></br>
+		<code> >>> push 1</code></br>
+		<code> >>> push 2</code></br>
+		<code> >>> push 3</code></br>
+		<code> >>> pall</code></br>
+
+	output</br>
+		<code> $ ./monty test_1.m</code></br>
+		<code> >>> 0</code></br>
+		<code> >>> 1</code></br>
+		<code> >>> 2</code></br>
+		<code> >>> 3</code></br>
+    </td>
+  </tr>
+  <tr>
+    <td>stack</td>
+    <td>
+        The opcode stack sets the format of the data to a stack (LIFO). This is the default behavior of the program.</br></br>
+	Example:</br>
+		<code> $cat test_1.m</code></br>
+		<code> >>> stack</code></br>
+		<code> >>> push 0</code></br>
+		<code> >>> push 1</code></br>
+		<code> >>> push 2</code></br>
+		<code> >>> push 3</code></br>
+		<code> >>> pall</code></br>
+	output</br>
+		<code> $ ./monty test_1.m</code></br>
+		<code> >>> 3</code></br>
+		<code> >>> 2</code></br>
+		<code> >>> 1</code></br>
+		<code> >>> 0</code></br>
     </td>
   </tr>
 </table>
 
-
-<table class="tg">
-  <col width="45%">
-  <col width="65%">
-  <tr>
-    <td><b>width</b></td>
-    <td><b>Effected Specifers</b></td>
-    <td><b>Description and Examples</b> </td>
-  </tr>
-  <tr>
-    <td>-</td>
-    <td>d, i, u, o, x, X, b, c, s</td>
-    <td>
-	minimum number to be printed</br>
-	<code>_printf("A%dlast", 5);</code></br>
-	<code>_printf("A%3dlast", 5);</code></br>
-	output</br>
-	<code>$ A5last</code></br>
-        <code>$ A  5last</code></br>
-    </td>
-  </tr>
-</table>
-
-<table class="tg">
-  <col width="45%">
-  <col width="65%">
-  <tr>
-    <td><b>.percision</b></td>
-    <td><b>Effected Specifers</b></td>
-    <td><b>Description and Examples</b> </td>
-  </tr>
-  <tr>
-    <td>-</td>
-    <td>d, i, u, o, x, X, s</td>
-    <td>
-	For integer specifiers (d, i, o, u, x, X) − precision specifies the minimum number of digits to be written. If the value to be written is shorter than this number, the result is padded with leading zeros.</br>
-	<code>_printf("A%dlast", 5);</code></br>
-	<code>_printf("A%.3dlast", 5);</code></br>
-	output</br>
-	<code>$ A5last</code></br>
-        <code>$ A005last</code></br>
-	</br>
-	For s − this is the maximum number of characters to be printed.</br>
-	<code>_printf("A%s", "Holberton");</code></br>
-	<code>_printf("A%.3s", "Holberton");</code></br>
-	output</br>
-	<code>$ Holberton</code></br>
-        <code>$ Hol</code></br>
-    </td>
-  </tr>
-</table>
-##Future features
-format tags -, +, (space), #, and width for the pointer flag
-implement the length format tags
 
 ##Contributors
-*Justin Marsh* - [Github](https://github.com/j-tyler) || [Twitter](https://twitter.com/dogonthecircuit) || [email](justin.marsh@holbertonschool.com)
+*Jay Wang* - [Github](https://github.com/jayjay823) || [Twitter](https://twitter.com/jianqinwang94) || [email](jianqin.wang@holbertonschool.com)
 
 *Richard Sim* - [Github](https://github.com/rdsim8589) || [Twitter](https://twitter.com/richard_d_sim) || [email](richard.sim@holbertonschool.com)
 

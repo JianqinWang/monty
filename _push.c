@@ -52,8 +52,8 @@ void _pint(stack_t **head, unsigned int line_number)
 	if (temp == NULL)
 	{
 		printf("L%u: can't pint, stack empty\n", line_number);
-		free_stack(head);
-		exit(EXIT_FAILURE);
+		glob[2] = 1;
+		return;
 	}
 	else
 		printf("%d\n", temp->n);
@@ -72,8 +72,8 @@ void _pop(stack_t **head, unsigned int line_number)
 	if (*head == NULL)
 	{
 		printf("L%u: can't pop an empty stack\n", line_number);
-		free_stack(head);
-		exit(EXIT_FAILURE);
+		glob[2] = 1;
+		return;
 	}
 	temp = find_end(head);
 	helper = temp->prev;
@@ -96,11 +96,11 @@ void _swap(stack_t **head, unsigned int line_number)
 	int help;
 
 	temp = find_end(head);
-	if (temp == NULL || temp->prev == NULL )
+	if (temp == NULL || temp->prev == NULL)
 	{
 		printf("L%u: can't swap, stack too short\n", line_number);
-		free_stack(head);
-		exit(EXIT_FAILURE);
+		glob[2] = 1;
+		return;
 	}
 	helper = temp->prev;
 	help = temp->n;

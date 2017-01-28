@@ -18,7 +18,8 @@ char *get_cmd(char *line, unsigned int line_num)
 		if (temp_num == NULL)
 		{
 			printf("L%u: usage: push integer\n", line_num);
-			exit(EXIT_FAILURE);
+			glob[2] = 1;
+			return (NULL);
 		}
 		i = strtol(temp_num, &ptr, 10);
 		if (errno == ERANGE || (*ptr != '\0' && *ptr != '\n'
@@ -26,9 +27,49 @@ char *get_cmd(char *line, unsigned int line_num)
 			|| i > INT_MAX || i < INT_MIN)
 		{
 			printf("L%u: usage: push integer\n", line_num);
-			exit(EXIT_FAILURE);
+			glob[2] = 1;
+			return (NULL);
 		}
 		glob[0] = i;
 	}
-	return t;
+	return (t);
+}
+/**
+ * check_op_code - check if the cmd found is one of the built-in opcodes.
+ * If op code is found, program will execute.
+ *
+ * @head: pointer to the bottom of the stack
+ * @cmd: the cmd being checked if it is built-it
+ * @line_num: line num where the command was found.
+ */
+
+void check_op_code(stack_t **head, char *cmd, unsigned int line_num)
+{
+	int j;
+	unsigned int cmd_stat;
+	instruction_t instruct[] = {
+		{"push", _push}, {"pall", _pall}, {"pint", _pint}, {"pop", _pop},
+		{"swap", _swap}, {"add", _add}, {"nop", _nop}, {"sub", _sub},
+		{"div", _div}, {"mul", _mul}, {"mod", _mod}, {"pchar", _pchar},
+		{"pstr", _pstr}, {"rotl", _rotl}, {"rotr", _rotr},
+		{"queue", _queue}, {"stack", _stack}
+	};
+
+	cmd_stat = 0;
+	for (j = 0; j < 17 && cmd != NULL; j++)
+	{
+		if (cmd[0] == '#')
+			break;
+		if (strcmp(instruct[j].opcode, cmd) == 0)
+		{
+			instruct[j].f(head, line_num);
+			cmd_stat = 1;
+			break;
+		}
+	}
+	if (cmd_stat == 0 && cmd[0] != '#')
+	{
+		printf("L%u: unknown instruction %s\n", line_num, cmd);
+		glob[2] = 1;
+	}
 }
