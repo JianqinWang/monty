@@ -11,10 +11,10 @@ char *get_cmd(char *line, unsigned int line_num)
 	char *ptr;
 	char *t, *temp_num;
 
-	t = strtok(line, " \n\t");
+	t = strtok(line, "\n\t ");
 	if (strcmp(t, "push") == 0)
 	{
-		temp_num = strtok(NULL, " \n\t");
+		temp_num = strtok(NULL, "\n\t ");
 		if (temp_num == NULL)
 		{
 			printf("L%u: usage: push integer\n", line_num);
