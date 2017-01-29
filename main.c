@@ -34,7 +34,10 @@ int main(int argc, char **argv)
 	while ((read = getline(&line, &len, fp)) != -1 && glob[2] != 1)
 	{
 		if (strlen(line) == 1 || strspn(line, " \r\n\t") == strlen(line))
+		{
+			line_num++;
 			continue;
+		}
 		cmd = get_cmd(line, line_num);
 		if (cmd == NULL)
 			break;
