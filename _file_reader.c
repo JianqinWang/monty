@@ -30,7 +30,7 @@ char *get_cmd(char *line, unsigned int line_num)
 			glob[2] = 1;
 			return (NULL);
 		}
-		glob[0] = i;
+		glob[0] = atoi(temp_num);
 	}
 	return (t);
 }
