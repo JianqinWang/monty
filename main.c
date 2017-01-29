@@ -41,7 +41,8 @@ int main(int argc, char **argv)
 		check_op_code(&head, cmd, line_num);
 		line_num++;
 	}
-	free(line);
+	if (line)
+		free(line);
 	free_stack(&head);
 	fclose(fp);
 	if (glob[2] == 1)
