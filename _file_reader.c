@@ -23,7 +23,7 @@ char *get_cmd(char *line, unsigned int line_num)
 
 		for (i = 0; temp_num[i] != '\0'; i++)
 		{
-			if (temp_num[i] == '+' || temp_num[i] == '-')
+			if (i == 0 && (temp_num[i] == '+' || temp_num[i] == '-'))
 				continue;
 			if (temp_num[i] < '0' || temp_num[i] > '9')
 			{
