@@ -46,5 +46,5 @@ int main(int argc, char **argv)
 	fclose(fp);
 	if (glob[2] == 1)
 		exit(EXIT_FAILURE);
-	exit(EXIT_SUCCESS);
+	return (0);
 }
