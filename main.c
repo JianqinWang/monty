@@ -36,6 +36,8 @@ int main(int argc, char **argv)
 		if (strlen(line) == 1 || strspn(line, " \r\n\t") == strlen(line))
 			continue;
 		cmd = get_cmd(line, line_num);
+		if (cmd == NULL)
+			break;
 		check_op_code(&head, cmd, line_num);
 		line_num++;
 	}
