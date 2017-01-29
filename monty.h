@@ -40,7 +40,7 @@ typedef struct instruction_s
 } instruction_t;
 
 /* initialize global array */
-extern int glob[];
+extern long int glob[];
 
 /* push function */
 void _push(stack_t **head, unsigned int line_number);

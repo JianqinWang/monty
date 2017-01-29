@@ -1,6 +1,6 @@
  #include "monty.h"
 
-int glob[] = {0, 0, 0};
+long int glob[] = {0, 0, 0};
 /**
  * main - the main execution frame for monty interpreter
  * @argc: number of arguments read from command line
