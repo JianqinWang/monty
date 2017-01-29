@@ -8,7 +8,6 @@
 char *get_cmd(char *line, unsigned int line_num)
 {
 	long int i;
-	char *ptr;
 	char *t, *temp_num;
 
 	t = strtok(line, "\n\t \r");
@@ -21,14 +20,17 @@ char *get_cmd(char *line, unsigned int line_num)
 			glob[2] = 1;
 			return (NULL);
 		}
-		i = strtol(temp_num, &ptr, 10);
-		if (errno == ERANGE || (*ptr != '\0' && *ptr != '\n'
-					&& *ptr != ' ' && *ptr != '\t')
-			|| i > INT_MAX || i < INT_MIN)
+
+		for (i = 0; temp_num[i] != '\0'; i++)
 		{
-			printf("L%u: usage: push integer\n", line_num);
-			glob[2] = 1;
-			return (NULL);
+			if (temp_num[i] == '+' || temp_num[i] == '-')
+				continue;
+			if (temp_num[i] < '0' || temp_num[i] > '9')
+			{
+				printf("L%u: usage: push integer\n", line_num);
+				glob[2] = 1;
+				return (NULL);
+			}
 		}
 		glob[0] = atoi(temp_num);
 	}
