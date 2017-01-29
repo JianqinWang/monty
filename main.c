@@ -35,8 +35,7 @@ int main(int argc, char **argv)
 	{
 		if (strlen(line) == 1 || strspn(line, " \r\n\t") == strlen(line))
 		{
-			line_num++;
-			continue;
+			line_num++; continue;
 		}
 		cmd = get_cmd(line, line_num);
 		if (cmd == NULL)
@@ -44,8 +43,7 @@ int main(int argc, char **argv)
 		check_op_code(&head, cmd, line_num);
 		line_num++;
 	}
-	if (line)
-		free(line);
+	free(line);
 	free_stack(&head);
 	fclose(fp);
 	if (glob[2] == 1)
