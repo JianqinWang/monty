@@ -87,6 +87,8 @@ void free_stack(stack_t **head)
 {
 	stack_t *temp, *helper;
 
+	if (head == NULL)
+		return;
 	temp = *head;
 	while (temp != NULL)
 	{
