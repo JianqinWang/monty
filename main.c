@@ -1,5 +1,10 @@
  #include "monty.h"
 
+/** global variable glob
+ * index 0: the number that is supposed to be pushed onto stack
+ * index 1: 0 for stack, 1 for queue
+ * index 2: 0 for exit success, 1 for exit failure
+ */
 int glob[] = {0, 0, 0};
 /**
  * main - the main execution frame for monty interpreter
