@@ -1,4 +1,5 @@
 #include "monty.h"
+
 /**
  * get_cmd - parse the command found from line from text file
  * @line: line to parse
@@ -38,8 +39,7 @@ char *get_cmd(char *line, unsigned int line_num)
 }
 /**
  * check_op_code - check if the cmd found is one of the built-in opcodes.
- * If op code is found, program will execute.
- *
+ * If op code is found, program will execute
  * @head: pointer to the bottom of the stack
  * @cmd: the cmd being checked if it is built-it
  * @line_num: line num where the command was found.
@@ -49,6 +49,7 @@ void check_op_code(stack_t **head, char *cmd, unsigned int line_num)
 {
 	int j;
 	unsigned int cmd_stat;
+	/* list of opcodes */
 	instruction_t instruct[] = {
 		{"push", _push}, {"pall", _pall}, {"pint", _pint}, {"pop", _pop},
 		{"swap", _swap}, {"add", _add}, {"nop", _nop}, {"sub", _sub},
